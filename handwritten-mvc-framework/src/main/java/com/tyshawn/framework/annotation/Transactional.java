@@ -6,7 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 事务控制, 只能加在方法上
+ * @author tison
+ * 事务控制, 方法级别的控制
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

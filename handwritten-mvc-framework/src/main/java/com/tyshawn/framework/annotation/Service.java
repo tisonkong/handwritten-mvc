@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * @author tison
  * 服务类注解
  */
 @Target(ElementType.TYPE)
