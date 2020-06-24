@@ -3,7 +3,8 @@ package com.tison.framework.annotation;
 import java.lang.annotation.*;
 
 /**
- * 切面注解
+ * @author tison
+ * 切面注解 类级别的控制
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

@@ -7,18 +7,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author tison
  * 代理链
  */
 public class ProxyChain {
 
-    private final Class<?> targetClass; //目标类
-    private final Object targetObject; //目标对象
-    private final Method targetMethod; //目标方法
-    private final MethodProxy methodProxy; //方法代理
-    private final Object[] methodParams; //方法参数
+    /**
+     * 目标类
+     */
+    private final Class<?> targetClass;
 
-    private List<Proxy> proxyList = new ArrayList<>(); //代理列表
-    private int proxyIndex = 0; //代理索引
+    /**
+     * 目标对象
+     */
+    private final Object targetObject;
+
+    /**
+     * 目标方法
+     */
+    private final Method targetMethod;
+
+    /**
+     * 方法代理
+     */
+    private final MethodProxy methodProxy;
+
+    /**
+     * 方法参数
+     */
+    private final Object[] methodParams;
+
+    /**
+     * 代理列表
+     */
+    private List<Proxy> proxyList = new ArrayList<>();
+
+    /**
+     * 代理索引
+     */
+    private int proxyIndex = 0;
 
     public ProxyChain(Class<?> targetClass, Object targetObject, Method targetMethod, MethodProxy methodProxy, Object[] methodParams, List<Proxy> proxyList) {
         this.targetClass = targetClass;
@@ -47,7 +74,7 @@ public class ProxyChain {
     public Object doProxyChain() throws Throwable {
         Object methodResult;
         if (proxyIndex < proxyList.size()) {
-            //执行增强方法
+            //执行增强方法(初次执行的是为)
             methodResult = proxyList.get(proxyIndex++).doProxy(this);
         } else {
             //目标方法最后执行且只执行一次

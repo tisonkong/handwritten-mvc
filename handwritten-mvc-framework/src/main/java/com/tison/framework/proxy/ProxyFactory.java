@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
+ * @author tison
  * 代理管理器
  */
 public class ProxyFactory {
@@ -17,9 +18,17 @@ public class ProxyFactory {
      */
     @SuppressWarnings("unchecked")
     public static <T> T createProxy(final Class<?> targetClass, final List<Proxy> proxyList) {
+
         return (T) Enhancer.create(targetClass, new MethodInterceptor() {
+
             /**
              * 代理方法, 每次调用目标方法时都会先创建一个 ProxyChain 对象, 然后调用该对象的 doProxyChain() 方法.
+             * @param targetObject cglib生成的代理对象
+             * @param targetMethod 被代理对象方法
+             * @param methodParams 方法入参
+             * @param methodProxy 代理方法
+             * @return
+             * @throws Throwable
              */
             @Override
             public Object intercept(Object targetObject, Method targetMethod, Object[] methodParams, MethodProxy methodProxy) throws Throwable {

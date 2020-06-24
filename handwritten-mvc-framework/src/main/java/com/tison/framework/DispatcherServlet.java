@@ -57,7 +57,8 @@ public class DispatcherServlet extends HttpServlet {
 
         //动态注册处理静态资源的默认Servlet
         ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
-        defaultServlet.addMapping("/favicon.ico"); //网站头像
+        //网站头像
+        defaultServlet.addMapping("/favicon.ico");
         defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
     }
 
@@ -73,6 +74,7 @@ public class DispatcherServlet extends HttpServlet {
         }
 
         //根据请求获取处理器(这里类似于SpringMVC中的映射处理器)
+        //requestMethod为GET/POST等类型，requestPath为路径
         Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
         if (handler != null) {
             Class<?> controllerClass = handler.getControllerClass();
@@ -105,7 +107,8 @@ public class DispatcherServlet extends HttpServlet {
     private void handleViewResult(View view, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String path = view.getPath();
         if (StringUtils.isNotEmpty(path)) {
-            if (path.startsWith("/")) { //重定向
+            //重定向
+            if (path.startsWith("/")) {
                 response.sendRedirect(request.getContextPath() + path);
             } else { //请求转发
                 Map<String, Object> model = view.getModel();
@@ -118,7 +121,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     /**
-     * 返回JSON数据
+     * 返回JSON数据,类似于视图渲染
      */
     private void handleDataResult(Data data, HttpServletResponse response) throws IOException {
         Object model = data.getModel();
