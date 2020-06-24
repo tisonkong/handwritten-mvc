@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 
 /**
- * 切面代理 抽象类
+ * 切面代理抽象类,各种增强方法都进行了空实现，子类继承时可重写
  */
 public abstract class AspectProxy implements Proxy {
 

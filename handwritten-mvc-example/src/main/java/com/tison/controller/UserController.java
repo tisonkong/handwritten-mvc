@@ -19,6 +19,7 @@ import java.util.Map;
  */
 @Controller
 public class UserController {
+
     @Autowired
     private IUserService userService;
 

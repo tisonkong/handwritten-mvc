@@ -1,3 +1,5 @@
+package com.tison;
+
 import com.tison.framework.util.ClassUtil;
 import org.junit.jupiter.api.Test;
 

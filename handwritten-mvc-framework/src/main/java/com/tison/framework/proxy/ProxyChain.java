@@ -74,7 +74,7 @@ public class ProxyChain {
     public Object doProxyChain() throws Throwable {
         Object methodResult;
         if (proxyIndex < proxyList.size()) {
-            //执行增强方法(初次执行的是为)
+            //执行增强方法(初次都会触发执行)
             methodResult = proxyList.get(proxyIndex++).doProxy(this);
         } else {
             //目标方法最后执行且只执行一次

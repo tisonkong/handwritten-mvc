@@ -14,6 +14,8 @@ import java.util.*;
 
 /**
  * 切面编程助手类
+ * 切面类：继承自Aspect的Aop类
+ * 目标类：需要增强的targetClass
  */
 public final class AopHelper {
 
@@ -21,9 +23,9 @@ public final class AopHelper {
 
     static {
         try {
-            //切面类-目标类集合的映射
+            //切面类-目标类集合的映射，Map中kv形式为<aspect实现类，aspect实现类需要增强的类集合>
             Map<Class<?>, Set<Class<?>>> aspectMap = createAspectMap();
-            //目标类-切面对象列表的映射
+            //目标类-切面对象列表的映射，Map中kv形式为<需增强的目标类，切面对象的列表集合>
             Map<Class<?>, List<Proxy>> targetMap = createTargetMap(aspectMap);
             //把切面对象织入到目标类中, 创建代理对象
             for (Map.Entry<Class<?>, List<Proxy>> targetEntry : targetMap.entrySet()) {
@@ -50,11 +52,13 @@ public final class AopHelper {
 
     /**
      *  获取普通切面类-目标类集合的映射
+     *  Map中key为AspectProxy的实现类，value为该实现类需要增强的目标类
      */
     private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> aspectMap) throws Exception {
         //所有实现了AspectProxy抽象类的切面
         Set<Class<?>> aspectClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
         for (Class<?> aspectClass : aspectClassSet) {
+            //同时类上声明了Aspect的注解
             if (aspectClass.isAnnotationPresent(Aspect.class)) {
                 Aspect aspect = aspectClass.getAnnotation(Aspect.class);
                 //与该切面对应的目标类集合
@@ -93,18 +97,21 @@ public final class AopHelper {
 
     /**
      * 将切面类-目标类集合的映射关系 转化为 目标类-切面对象列表的映射关系
+     * Map<aspect实现类，实现类需增强的目标类>  ==>  Map<增强的目标类，切面对象的列表集合>
      */
     private static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> aspectMap) throws Exception {
         Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>();
         for (Map.Entry<Class<?>, Set<Class<?>>> proxyEntry : aspectMap.entrySet()) {
-            //切面类
+            //切面类：aspect的一个实现类
             Class<?> aspectClass = proxyEntry.getKey();
-            //目标类集合
+            //目标类集合：aspect实现类中针对的需要增强的目标类
             Set<Class<?>> targetClassSet = proxyEntry.getValue();
             //创建目标类-切面对象列表的映射关系
             for (Class<?> targetClass : targetClassSet) {
-                //切面对象
+                //实例化一个切面对象
                 Proxy aspect = (Proxy) aspectClass.newInstance();
+                //若map中已经存在则针对不同aspect实现类进行增强，否则只是对目标类增强一次
+                //比如userService既包含了统计Aspect切面，又包含了Transaction切面等
                 if (targetMap.containsKey(targetClass)) {
                     targetMap.get(targetClass).add(aspect);
                 } else {

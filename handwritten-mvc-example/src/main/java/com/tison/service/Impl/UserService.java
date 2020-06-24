@@ -17,6 +17,7 @@ public class UserService implements IUserService {
     /**
      * 获取所有用户
      */
+    @Override
     public List<User> getAllUser() {
         String sql = "SELECT * FROM user";
         return DatabaseHelper.queryEntityList(User.class, sql);
@@ -25,6 +26,7 @@ public class UserService implements IUserService {
     /**
      * 根据id获取用户信息
      */
+    @Override
     public User GetUserInfoById(Integer id) {
         String sql = "SELECT * FROM user WHERE id = ?";
         return DatabaseHelper.queryEntity(User.class, sql, id);
@@ -33,6 +35,7 @@ public class UserService implements IUserService {
     /**
      * 修改用户信息
      */
+    @Override
     @Transactional
     public boolean updateUser(int id, Map<String, Object> fieldMap) {
         return DatabaseHelper.updateEntity(User.class, id, fieldMap);

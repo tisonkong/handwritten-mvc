@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
  */
 @Aspect(pkg = "com.tyshawn.controller", cls = "UserController")
 public class EfficientAspect extends AspectProxy {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EfficientAspect.class);
 
     private long begin;
