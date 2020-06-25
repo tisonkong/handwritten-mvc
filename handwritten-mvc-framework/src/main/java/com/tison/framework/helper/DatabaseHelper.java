@@ -31,7 +31,6 @@ public final class DatabaseHelper {
 
     static {
         CONNECTION_HOLDER = new ThreadLocal<Connection>();
-
         QUERY_RUNNER = new QueryRunner();
 
         DATA_SOURCE = new BasicDataSource();

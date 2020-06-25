@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/easy-framework/easy-framework.iml" filepath="$PROJECT_DIR$/easy-framework/easy-framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/easy-spring.iml" filepath="$PROJECT_DIR$/.idea/easy-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework-basic/framework-basic.iml" filepath="$PROJECT_DIR$/framework-basic/framework-basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/handwritten-mvc-example/handwritten-mvc-example.iml" filepath="$PROJECT_DIR$/handwritten-mvc-example/handwritten-mvc-example.iml" />
       <module fileurl="file://$PROJECT_DIR$/handwritten-mvc-framework/handwritten-mvc-framework.iml" filepath="$PROJECT_DIR$/handwritten-mvc-framework/handwritten-mvc-framework.iml" />
     </modules>

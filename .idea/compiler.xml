@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="framework-basic" />
         <module name="handwritten-mvc-example" />
-        <module name="easy-framework" />
         <module name="handwritten-mvc-framework" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="easy-framework" target="1.5" />
+      <module name="framework-basic" target="1.5" />
       <module name="handwritten-mvc-example" target="1.7" />
       <module name="handwritten-mvc-framework" target="1.8" />
       <module name="simple-spring" target="1.8" />
